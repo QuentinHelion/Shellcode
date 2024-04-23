@@ -1,1 +1,1 @@
-gcc shellcode-test.c -o testop2 -fno-stack-protector -z execstack
+gcc -fno-stack-protector -z execstack -m32 shellcode-test.c -o revshellfromc
