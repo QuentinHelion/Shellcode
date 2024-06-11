@@ -116,9 +116,9 @@ for instruct in listOfInstructs:
         else:
             modifiedInstruct = "mov " + reg + ",0"
     elif instruct.address == (0x1000 + 13):
-        modifiedInstruct = "push " + reg
+        modifiedInstruct = "push " + reg + getUnimpactfulInstructs() 
     elif instruct.address == (0x1000 + 14):
-        modifiedInstruct = "push " + reg
+        modifiedInstruct = "push " + reg + getUnimpactfulInstructs()
     elif instruct.address == (0x1000 + 28):
         modifiedInstruct = "xor eax,eax\nmov ax, 0x5c11\npush ax"
     elif instruct.address == (0x1000 + 32):
