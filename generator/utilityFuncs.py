@@ -1,5 +1,6 @@
 import random
 
+# Generates random string for the label
 def genRandomString(length):
     return "".join(random.choices('abcdefghijklmnopqrstuvwxyz', k=length))
 
@@ -7,6 +8,7 @@ def getRandomRegister():
     registers = ['ebx', 'ecx', 'edx', 'edi', 'esi']
     return random.choice(registers)
 
+# A list of instructions that even if they are added they won't impact the code 
 def getUnimpactfulInstructs():
     unimpactful_instructions = [
         ["xor eax, eax", "xor ebx, ebx"],
@@ -33,6 +35,7 @@ def getUnimpactfulInstructs():
         ["xchg ecx, edx", "xchg ecx, edx"],
         ["xchg eax, ebx", "xchg eax, ebx", "xchg ecx, edx", "xchg ecx, edx"]
     ]
+    # Chooses a random number that will be the number of instructions to add 
     nbInstructs = random.randint(1, 5)
     instructs = random.sample(unimpactful_instructions, nbInstructs)
     return "\n" + "\n".join(["\n".join(instr) for instr in instructs])
@@ -40,6 +43,7 @@ def getUnimpactfulInstructs():
 def int2hex(int_val):
     return hex(int_val & 0xFFFF)[2:].zfill(2)
 
+# checks if the given ip is a valid ipv4 address
 def is_valid_ipv4(ip):
     parts = ip.split('.')
     if len(parts) != 4:
@@ -49,6 +53,7 @@ def is_valid_ipv4(ip):
             return False
     return True
 
+# Checks if the IP has 0 in it if yes it will be implemented as a substraction of 2 IPs that dont have a 0 in hex if not it will be converted to hex in little endian
 def process_ip(ip):
     parts = list(map(int, ip.split('.')))
     if any(part == 0 for part in parts):
@@ -61,6 +66,7 @@ def process_ip(ip):
         result = '0x' + ''.join(hex_values[::-1])
         return f"push {result}"
 
+# Converts port to hex value in little endian
 def process_port(port):
     inverted = f"{port:04x}"
     hexport = inverted[2:] + inverted[:2]
